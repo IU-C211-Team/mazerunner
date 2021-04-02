@@ -17,7 +17,7 @@ public class MazeRunner extends Application {
 		// TODO Auto-generated method stub
 		mainScreen.initStyle(StageStyle.UNDECORATED);
 		mainScreen.initStyle(StageStyle.TRANSPARENT);
-		mainScreen.setScene(sCustom.scene);
+		mainScreen.setScene(sCustom.constructScene());
 		mainScreen.show();
 	}
 
