@@ -1,12 +1,12 @@
 .button-style-closebutton {
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-color: linear-gradient(#ff605c, #be1d00);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-font-family: "Copperplate Gothic Bold"; 
 }
 .button-style-closebutton: hover {
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-color: linear-gradient(#ff605c, #be1d00);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
