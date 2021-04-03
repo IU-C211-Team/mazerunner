@@ -28,7 +28,7 @@ public class ScreenCustomizer {
 	private Scene scene = new Scene(border, screenWidth * .65, screenHeight * .75);
 	private Button close = new Button("X");
 	
-	BackgroundFill backgroundScheme = new BackgroundFill(Color.web("#D3BFA8"), CornerRadii.EMPTY, Insets.EMPTY);
+	BackgroundFill backgroundScheme = new BackgroundFill(Color.web("#E9DFD4"), CornerRadii.EMPTY, Insets.EMPTY);
 	BackgroundFill titleBackground = new BackgroundFill(Color.web("#B18E67"), CornerRadii.EMPTY, Insets.EMPTY);
 	
 	Image logo = new Image("logo.png");
