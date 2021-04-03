@@ -1,12 +1,13 @@
 .button-style-closebutton {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
-    -fx-background-radius: 30;
+    -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
+    -fx-font-family: "Copperplate Gothic Bold"; 
 }
 .button-style-closebutton: hover {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
-    -fx-background-radius: 30;
+    -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 5, 0.0 , 0 , 1 );

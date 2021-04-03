@@ -28,9 +28,6 @@ public class ScreenCustomizer {
 	private Scene scene = new Scene(border, screenWidth * .65, screenHeight * .75);
 	private Button close = new Button("X");
 	
-	BackgroundFill backgroundScheme = new BackgroundFill(Color.web("#E9DFD4"), CornerRadii.EMPTY, Insets.EMPTY);
-	BackgroundFill titleBackground = new BackgroundFill(Color.web("#B18E67"), CornerRadii.EMPTY, Insets.EMPTY);
-	
 	Image logo = new Image("logo.png");
 	ImageView logoIV = new ImageView(logo);
 	
@@ -41,7 +38,7 @@ public class ScreenCustomizer {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 		
 		border.setTop(setTitleBar());
-		border.setBackground(new Background(backgroundScheme));
+		border.setBackground(new Background(setBackground("#E9DFD4")));
 		
 		return scene;
 	}
@@ -63,9 +60,19 @@ public class ScreenCustomizer {
 		
 		title.setAlignment(Pos.TOP_CENTER);
 		title.setPadding(new Insets(screenHeight * .01, screenWidth * .01, screenHeight * .01, screenWidth * .01));
-		title.setBackground(new Background(titleBackground));
+		title.setBackground(new Background(setBackground("#B18E67")));
 		title.getChildren().addAll(r1, logoIV, r2, close);
 		
 		return title;
+	}
+	
+	private void setCenterArea() {
+		// Here is where the main code for the maze will be displayed
+	}
+	
+	private BackgroundFill setBackground(String color) {
+		BackgroundFill bf = new BackgroundFill(Color.web(color), CornerRadii.EMPTY, Insets.EMPTY);
+		
+		return bf;
 	}
 }
