@@ -11,4 +11,5 @@
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 5, 0.0 , 0 , 1 );
+    -fx-cursor: hand;
 }
