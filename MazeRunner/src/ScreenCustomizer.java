@@ -15,6 +15,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -29,7 +33,9 @@ public class ScreenCustomizer {
 	private Button close = new Button("X");
 	private Button minimize = new Button("\uD83D\uDDD5");
 	private Button maximize = new Button("\uD83D\uDDD6");
-
+	
+	private Font font = new Font("Helvetica", 12);
+	
 	private Boolean fullscreen = false;
 
 	private Image logo = new Image("logo.png");
@@ -42,7 +48,7 @@ public class ScreenCustomizer {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 
 		border.setTop(setTitleBar());
-		border.setBackground(new Background(setBackground("#E9DFD4")));
+		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93")));
 
 		return scene;
 	}
@@ -53,15 +59,16 @@ public class ScreenCustomizer {
 		logoIV.setPreserveRatio(true);
 		HBox.setHgrow(r1, Priority.ALWAYS);
 		HBox.setHgrow(r2, Priority.ALWAYS);
-
-		minimize.setTooltip(new Tooltip("Minimize"));
+		
+		//minTool.setStyle("-fx-font-size: 10; -fx-font-family: \"Helvetica\"");
+		minimize.setTooltip(setToolTips(1));
 		minimize.getStyleClass().add("button-style-minimizebutton");
 		minimize.setOnAction(e -> {
 			Stage stage = (Stage) minimize.getScene().getWindow();
 			stage.setIconified(true);
 		});
 
-		maximize.setTooltip(new Tooltip("Maximize"));
+		maximize.setTooltip(setToolTips(2));
 		maximize.getStyleClass().add("button-style-maximizebutton");
 		maximize.setOnAction(e -> {
 			Node  source = (Node)  e.getSource();
@@ -71,23 +78,24 @@ public class ScreenCustomizer {
 				stage.setHeight(screenHeight * .75);
 				stage.setX((screenWidth - stage.getWidth()) / 2);
 				stage.setY((screenHeight - stage.getHeight()) / 2);
+				logoIV.setFitHeight(screenHeight * .1);
 				maximize.setText("\uD83D\uDDD6");
-				maximize.setTooltip(new Tooltip("Maximize"));
+				maximize.setTooltip(setToolTips(2));
 				fullscreen = false;
 			} else {
 				stage.setWidth(screenWidth);
 				stage.setHeight(screenHeight);
 				stage.setX(screenBounds.getMinX());
 				stage.setY(screenBounds.getMinY());
+				logoIV.setFitHeight(screenHeight * .125);
 				maximize.setText("\uD83D\uDDD7");
-				maximize.setTooltip(new Tooltip("Restore"));
+				maximize.setTooltip(setToolTips(3));
 				fullscreen = true;
 			}
 
 		});
 
-
-		close.setTooltip(new Tooltip("Close"));
+		close.setTooltip(setToolTips(4));
 		close.getStyleClass().add("button-style-closebutton");
 		close.setOnAction(e -> {
 			Node  source = (Node)  e.getSource(); 
@@ -112,5 +120,42 @@ public class ScreenCustomizer {
 		BackgroundFill bf = new BackgroundFill(Color.web(color), CornerRadii.EMPTY, Insets.EMPTY);
 
 		return bf;
+	}
+	
+	private BackgroundFill setBackground(String color1, String color2, String color3) {
+		Stop[] stop = {new Stop(0, Color.web(color1)), new Stop(.5, Color.web(color2)), new Stop(1, Color.web(color3))};
+		LinearGradient lg;
+		
+		if (fullscreen) {
+			lg = new LinearGradient(0, 0, (screenWidth) / 2, (screenHeight) / 2, false, CycleMethod.REFLECT, stop);
+		} else {
+			lg = new LinearGradient(0, 0, (screenWidth * .65) / 2, (screenHeight * .75) / 2, false, CycleMethod.REFLECT, stop);
+		}
+		
+		BackgroundFill bf = new BackgroundFill(lg, CornerRadii.EMPTY, Insets.EMPTY);
+		
+		return bf;
+	}
+	
+	private Tooltip setToolTips(int selection) {
+		Tooltip tp = new Tooltip();
+		
+		switch (selection) {
+		case 1:
+			tp = new Tooltip("Minimize");
+			break;
+		case 2:
+			tp = new Tooltip("Maximize");
+			break;
+		case 3:
+			tp = new Tooltip("Restore");
+			break;
+		case 4:
+			tp = new Tooltip("Close");
+			break;
+		}
+		
+		tp.setFont(font);
+		return tp;
 	}
 }
