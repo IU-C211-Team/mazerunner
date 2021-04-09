@@ -60,7 +60,6 @@ public class ScreenCustomizer {
 		HBox.setHgrow(r1, Priority.ALWAYS);
 		HBox.setHgrow(r2, Priority.ALWAYS);
 		
-		//minTool.setStyle("-fx-font-size: 10; -fx-font-family: \"Helvetica\"");
 		minimize.setTooltip(setToolTips(1));
 		minimize.getStyleClass().add("button-style-minimizebutton");
 		minimize.setOnAction(e -> {

@@ -18,7 +18,7 @@
     -fx-font-size:15;
 }
 .button-style-minimizebutton {
-    -fx-background-color: linear-gradient(#ffbd44, #cc9837);
+    -fx-background-color: linear-gradient(#ffff00, #cccc00);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
@@ -27,7 +27,7 @@
     -fx-font-size:15;
 }
 .button-style-minimizebutton: hover {
-    -fx-background-color: linear-gradient(#ffbd44, #cc9837);
+    -fx-background-color: linear-gradient(#ffff00, #cccc00);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
