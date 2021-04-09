@@ -16,6 +16,8 @@ public class MazeRunner extends Application {
 		mainScreen.initStyle(StageStyle.UNDECORATED);
 		mainScreen.initStyle(StageStyle.TRANSPARENT);
 		mainScreen.setScene(sCustom.constructScene());
+		mainScreen.setX((sCustom.screenWidth - (sCustom.screenWidth * .65)) / 2);
+		mainScreen.setY((sCustom.screenHeight - (sCustom.screenHeight * .75)) / 2);
 		mainScreen.show();
 	}
 

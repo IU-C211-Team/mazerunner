@@ -1,15 +1,51 @@
 .button-style-closebutton {
-    -fx-background-color: linear-gradient(#ff605c, #be1d00);
+    -fx-background-color: linear-gradient(#ff605c, #cc4c49);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-font-family: "Copperplate Gothic Bold"; 
+    -fx-min-width: 30px;
 }
 .button-style-closebutton: hover {
-    -fx-background-color: linear-gradient(#ff605c, #be1d00);
+    -fx-background-color: linear-gradient(#ff605c, #cc4c49);
     -fx-background-radius: 35;
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 5, 0.0 , 0 , 1 );
     -fx-cursor: hand;
+    -fx-min-width: 30px;
+}
+.button-style-minimizebutton {
+    -fx-background-color: linear-gradient(#ffbd44, #cc9837);
+    -fx-background-radius: 35;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-family: "Copperplate Gothic Bold"; 
+    -fx-min-width: 30px;
+}
+.button-style-minimizebutton: hover {
+    -fx-background-color: linear-gradient(#ffbd44, #cc9837);
+    -fx-background-radius: 35;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 5, 0.0 , 0 , 1 );
+    -fx-cursor: hand;
+    -fx-min-width: 30px;
+}
+.button-style-maximizebutton {
+    -fx-background-color: linear-gradient(#00ca4e, #00963a);
+    -fx-background-radius: 35;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-family: "Copperplate Gothic Bold"; 
+    -fx-min-width: 30px;
+}
+.button-style-maximizebutton: hover {
+    -fx-background-color: linear-gradient(#00ca4e, #00963a);
+    -fx-background-radius: 35;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,1) , 5, 0.0 , 0 , 1 );
+    -fx-cursor: hand;
+    -fx-min-width: 30px;
 }
