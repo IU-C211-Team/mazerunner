@@ -48,7 +48,7 @@ public class ScreenCustomizer {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 
 		border.setTop(setTitleBar());
-		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93")));
+		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93", 1)));
 
 		return scene;
 	}
@@ -105,7 +105,7 @@ public class ScreenCustomizer {
 		title.setAlignment(Pos.TOP_CENTER);
 		title.setPadding(new Insets(screenHeight * .01, screenWidth * .01, screenHeight * .01, screenWidth * .01));
 		title.setSpacing(screenWidth * .002);
-		title.setBackground(new Background(setBackground("#B18E67")));
+		title.setBackground(new Background(setBackground("#A67E51", "#9B6E3C", "#905E26", 2)));
 		title.getChildren().addAll(r1, logoIV, r2, minimize, maximize, close);
 
 		return title;
@@ -114,21 +114,21 @@ public class ScreenCustomizer {
 	private void setCenterArea() {
 		// Here is where the main code for the maze will be displayed
 	}
-
-	private BackgroundFill setBackground(String color) {
-		BackgroundFill bf = new BackgroundFill(Color.web(color), CornerRadii.EMPTY, Insets.EMPTY);
-
-		return bf;
-	}
 	
-	private BackgroundFill setBackground(String color1, String color2, String color3) {
+	private BackgroundFill setBackground(String color1, String color2, String color3, int selection) {
 		Stop[] stop = {new Stop(0, Color.web(color1)), new Stop(.5, Color.web(color2)), new Stop(1, Color.web(color3))};
 		LinearGradient lg;
 		
 		if (fullscreen) {
-			lg = new LinearGradient(0, 0, (screenWidth) / 2, (screenHeight) / 2, false, CycleMethod.REFLECT, stop);
+			if (selection == 1)
+				lg = new LinearGradient(0, 0, (screenWidth) / 2, (screenHeight) / 2, false, CycleMethod.REFLECT, stop);
+			else
+				lg = new LinearGradient(0, 0, (screenWidth) / 2, (screenHeight * .125) / 2, false, CycleMethod.REFLECT, stop);
 		} else {
-			lg = new LinearGradient(0, 0, (screenWidth * .65) / 2, (screenHeight * .75) / 2, false, CycleMethod.REFLECT, stop);
+			if (selection == 1)
+				lg = new LinearGradient(0, 0, (screenWidth * .65) / 2, (screenHeight * .75) / 2, false, CycleMethod.REFLECT, stop);
+			else
+				lg = new LinearGradient(0, 0, (screenWidth * .65) / 2, (screenHeight * .1) / 2, false, CycleMethod.REFLECT, stop);
 		}
 		
 		BackgroundFill bf = new BackgroundFill(lg, CornerRadii.EMPTY, Insets.EMPTY);
