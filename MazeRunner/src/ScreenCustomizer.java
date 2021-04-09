@@ -57,8 +57,8 @@ public class ScreenCustomizer {
 		minimize.setTooltip(new Tooltip("Minimize"));
 		minimize.getStyleClass().add("button-style-minimizebutton");
 		minimize.setOnAction(e -> {
-			Stage obj = (Stage) minimize.getScene().getWindow();
-			obj.setIconified(true);
+			Stage stage = (Stage) minimize.getScene().getWindow();
+			stage.setIconified(true);
 		});
 
 		maximize.setTooltip(new Tooltip("Maximize"));
@@ -87,7 +87,7 @@ public class ScreenCustomizer {
 		});
 
 
-		close.setTooltip(new Tooltip("Closes App"));
+		close.setTooltip(new Tooltip("Close"));
 		close.getStyleClass().add("button-style-closebutton");
 		close.setOnAction(e -> {
 			Node  source = (Node)  e.getSource(); 
