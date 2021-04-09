@@ -71,8 +71,8 @@ public class ScreenCustomizer {
 				stage.setHeight(screenHeight * .75);
 				stage.setX((screenWidth - stage.getWidth()) / 2);
 				stage.setY((screenHeight - stage.getHeight()) / 2);
-				System.out.println((screenHeight - stage.getHeight()) / 2);
 				maximize.setText("\uD83D\uDDD6");
+				maximize.setTooltip(new Tooltip("Maximize"));
 				fullscreen = false;
 			} else {
 				stage.setWidth(screenWidth);
@@ -80,6 +80,7 @@ public class ScreenCustomizer {
 				stage.setX(screenBounds.getMinX());
 				stage.setY(screenBounds.getMinY());
 				maximize.setText("\uD83D\uDDD7");
+				maximize.setTooltip(new Tooltip("Restore"));
 				fullscreen = true;
 			}
 
