@@ -1,3 +1,14 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -113,6 +124,7 @@ public class ScreenCustomizer {
 
 	private void setCenterArea() {
 		// Here is where the main code for the maze will be displayed
+		
 	}
 	
 	private BackgroundFill setBackground(String color1, String color2, String color3, int selection) {
@@ -157,4 +169,53 @@ public class ScreenCustomizer {
 		tp.setFont(font);
 		return tp;
 	}
+	
+	
+	//added by Chloe Uphaus 
+	
+
+    JFrame Menu = new JFrame("Maze");
+    JButton Start = new JButton("Play");
+
+    ArrayList<String> mapList = new ArrayList<String>();
+    JComboBox<String> levelList;
+
+               
+	public void PlayButtons() {
+    	//Load map list
+    	getMapList();
+    	levelList = new JComboBox<String>(mapList.toArray(new String[mapList.size()]));
+    	
+        
+        //Start Button Variables
+        Menu.add(Start);
+        Start.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new MazeGenerator(levelList.getSelectedItem().toString());
+				Menu.setVisible(false);
+			}
+        	
+        });	
+        
+        
+        //Level Selector
+        Menu.add(levelList);
+        
+    }
+
+    static boolean levelsExist = false;
+
+    public void getMapList(){
+    	for(int i = 0; i < 99; i++){
+    		File map = new File("./Level "+i+".map");
+    		if(map.exists()){
+    			System.out.println("Level "+i+" exists");
+    			mapList.add("Level "+i+".map");
+    			levelsExist = true;
+    		}
+    	}
+    }
+	
 }
