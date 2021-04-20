@@ -43,6 +43,7 @@ public class MazeCreator {
 	
 		
 		try {
+			System.out.println(mapLvl);
 			BufferedReader br = new BufferedReader(new FileReader(mapLvl));
 			StringBuilder sb = new StringBuilder();
 			String line = br.readLine();
@@ -52,7 +53,7 @@ public class MazeCreator {
 				line = br.readLine();
 			}
 			char[] mapChar = sb.toString().toCharArray();
-			int count = 0;
+			int count = 0, row = 0;
 			
 			for (int i = 0; i < mapChar.length; i++) {
 				boxes[i] = new Pane();
@@ -63,13 +64,14 @@ public class MazeCreator {
 				} else if (mapChar[i] == '1') {
 					boxes[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 				}
+				
 				if (count == 20) {
 					count = 0;
-					mapGrid.add(boxes[i], count, (int) Math.ceil(i % 20));
-				} else {
-					mapGrid.add(boxes[i], count, (int) Math.ceil(i % 20));
-					count++;
+					row++;
 				}
+				
+				mapGrid.add(boxes[i], i % 20, row);
+				count++;
 				
 			}
 		} catch(Exception e) {
