@@ -115,22 +115,21 @@ public class MazeGenerator extends JFrame{
         this.setVisible(true);
     }
     
-    public static void main(String args[]){
-    	//needs to call to open the gui 
-    }
-    
     public void loadMap(String str){
         try{
             BufferedReader br = new BufferedReader(new FileReader(str));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
-
+            
             while (line != null) {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
+            
             String mapStr = sb.toString();
+            char[] mapCharArray = sb.toString().toCharArray();
+            System.out.println(mapCharArray.length);
             
             int counter = 0;
             for(int y = 0; y < columns; y++){

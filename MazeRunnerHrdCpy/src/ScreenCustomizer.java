@@ -40,6 +40,8 @@ public class ScreenCustomizer {
 	private Button minimize = new Button("\uD83D\uDDD5");
 	private Button maximize = new Button("\uD83D\uDDD6");
 	private Button start = new Button("START");
+	private Button about = new Button("ABOUT");
+	private Button exit = new Button("EXIT");
 	
 	private Font font = new Font("Helvetica", 12);
 	private Font font2 = new Font("Helvetica", 20);
@@ -51,6 +53,9 @@ public class ScreenCustomizer {
 
 	private Region r1 = new Region();
 	private Region r2 = new Region();
+	private Region v1 = new Region();
+	private Region v2 = new Region();
+	private Region v3 = new Region();
 	
 	private ComboBox<String> levelList;
 	
@@ -59,12 +64,15 @@ public class ScreenCustomizer {
 	private String fileName;
 	
 	private static boolean levelsExist = false;
+	private boolean mazeComplete = false;
 
+	private AlertBox aboutBox;
+	
 	public Scene constructScene() {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 
 		border.setTop(setTitleBar());
-		border.setCenter(setCenterArea());
+		border.setCenter(setCenterArea("Main"));
 		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93", 1)));
 
 		return scene;
@@ -128,8 +136,9 @@ public class ScreenCustomizer {
 		return title;
 	}
 
-	private VBox setCenterArea() {
+	private VBox setCenterArea(String value) {
 		VBox mainArea = new VBox();
+		VBox mazeArea = new VBox();
 		
 		getMapList();
     	
@@ -137,21 +146,49 @@ public class ScreenCustomizer {
     	
     	levelList = new ComboBox<>(FXCollections.observableArrayList(mapLevels));
     	levelList.setValue("Level 1");
-    	levelList.setMinWidth(screenWidth * .08);
+    	levelList.setMinWidth(screenWidth * .15);
     	levelList.setMinHeight(screenHeight * .05);
     	levelList.setStyle("-fx-font: 20 \"Helvetica\";");
     	
+    	VBox.setVgrow(v1, Priority.ALWAYS);
+    	VBox.setVgrow(v2, Priority.ALWAYS);
+    	VBox.setVgrow(v3, Priority.ALWAYS);
+    	
     	start.setFont(font2);
-    	start.minWidth(screenWidth * .11);
+    	start.setPrefWidth(screenWidth * .15);
     	start.setOnAction(e -> {
-    		String map2Load = "./bin/" + levelList.getValue() + ".map";
-    		new MazeGenerator(map2Load);
+    		setCenterArea("Maze");
     	});
-		
-    	mainArea.getChildren().addAll(levelList, start);
-    	mainArea.setAlignment(Pos.CENTER);
-    	mainArea.setSpacing(screenHeight * .1);
-		return mainArea;
+    	
+    	about.setFont(font2);
+    	about.setPrefWidth(screenWidth * .15);
+    	
+    	exit.setFont(font2);
+    	exit.setPrefWidth(screenWidth * .15);
+    	exit.setOnAction(e -> {
+    		Node  source = (Node)  e.getSource(); 
+			Stage stage  = (Stage) source.getScene().getWindow();
+			stage.close();
+    	});
+    	
+    	switch(value) {
+    	case "Main":
+    		mainArea.getChildren().clear();
+    		mazeArea.getChildren().clear();
+    		mainArea.getChildren().addAll(v1, levelList, v2, start, about, exit, v3);
+    		mainArea.setAlignment(Pos.CENTER);
+    		mainArea.setSpacing(screenHeight * .025);
+    		return mainArea;
+    	case "Maze":
+    		mainArea.getChildren().clear();
+    		mazeArea.getChildren().clear();
+    		String map2Load = "./bin/" + levelList.getValue() + ".map";
+    		//new MazeGenerator(map2Load);
+    		new MazeCreator(map2Load);
+    		return mazeArea;
+    	default:
+    		return mainArea;
+    	}
 	}
 	
 	public BackgroundFill setBackground(String color1, String color2, String color3, int selection) {
