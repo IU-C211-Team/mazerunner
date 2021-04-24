@@ -1,6 +1,8 @@
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,13 +31,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ScreenCustomizer {
-	private static Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+	public static Rectangle2D screenBounds = Screen.getPrimary().getBounds();
 
 	public static double screenHeight = screenBounds.getHeight();
 	public static double screenWidth = screenBounds.getWidth();
+	public static double defaultHeight = screenHeight * .75;
+	public static double defaultWidth = screenWidth * .65;
+	
 	public BorderPane border = new BorderPane();
 
-	private Scene scene = new Scene(border, screenWidth * .65, screenHeight * .75);
+	private Scene scene = new Scene(border, defaultWidth, defaultHeight);
 	private Button close = new Button("X");
 	private Button minimize = new Button("\uD83D\uDDD5");
 	private Button maximize = new Button("\uD83D\uDDD6");
@@ -46,7 +51,7 @@ public class ScreenCustomizer {
 	private Font font = new Font("Helvetica", 12);
 	private Font font2 = new Font("Helvetica", 20);
 	
-	private Boolean fullscreen = false;
+	public static Boolean fullscreen = false;
 
 	private Image logo = new Image("logo.png");
 	private ImageView logoIV = new ImageView(logo);
@@ -65,6 +70,7 @@ public class ScreenCustomizer {
 	
 	private static boolean levelsExist = false;
 	private boolean mazeComplete = false;
+	private boolean startPressed = false;
 
 	private AlertBox aboutBox;
 	
@@ -72,7 +78,7 @@ public class ScreenCustomizer {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 
 		border.setTop(setTitleBar());
-		border.setCenter(setCenterArea("Main"));
+		border.setCenter(setCenterArea());
 		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93", 1)));
 
 		return scene;
@@ -98,8 +104,8 @@ public class ScreenCustomizer {
 			Node  source = (Node)  e.getSource();
 			Stage stage  = (Stage) source.getScene().getWindow();
 			if (fullscreen) {
-				stage.setWidth(screenWidth * .65);
-				stage.setHeight(screenHeight * .75);
+				stage.setWidth(defaultWidth);
+				stage.setHeight(defaultHeight);
 				stage.setX((screenWidth - stage.getWidth()) / 2);
 				stage.setY((screenHeight - stage.getHeight()) / 2);
 				logoIV.setFitHeight(screenHeight * .1);
@@ -136,7 +142,7 @@ public class ScreenCustomizer {
 		return title;
 	}
 
-	private VBox setCenterArea(String value) {
+	private VBox setCenterArea() {
 		VBox mainArea = new VBox();
 		VBox mazeArea = new VBox();
 		
@@ -145,10 +151,20 @@ public class ScreenCustomizer {
     	String[] mapLevels = mapList.toArray(new String[mapList.size()]);
     	
     	levelList = new ComboBox<>(FXCollections.observableArrayList(mapLevels));
-    	levelList.setValue("Level 1");
+    	if (!startPressed) {
+    		levelList.setValue("Level 1");
+    	}
     	levelList.setMinWidth(screenWidth * .15);
     	levelList.setMinHeight(screenHeight * .05);
     	levelList.setStyle("-fx-font: 20 \"Helvetica\";");
+    	
+    	levelList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldVal, String newVal) {
+				// TODO Auto-generated method stub
+				levelList.setValue(newVal);
+			}		
+		});
     	
     	VBox.setVgrow(v1, Priority.ALWAYS);
     	VBox.setVgrow(v2, Priority.ALWAYS);
@@ -157,7 +173,7 @@ public class ScreenCustomizer {
     	start.setFont(font2);
     	start.setPrefWidth(screenWidth * .15);
     	start.setOnAction(e -> {
-    		setCenterArea("Maze");
+    		this.loadMaze();
     	});
     	
     	about.setFont(font2);
@@ -171,24 +187,14 @@ public class ScreenCustomizer {
 			stage.close();
     	});
     	
-    	switch(value) {
-    	case "Main":
-    		mainArea.getChildren().clear();
-    		mazeArea.getChildren().clear();
-    		mainArea.getChildren().addAll(v1, levelList, v2, start, about, exit, v3);
-    		mainArea.setAlignment(Pos.CENTER);
-    		mainArea.setSpacing(screenHeight * .025);
-    		return mainArea;
-    	case "Maze":
-    		mainArea.getChildren().clear();
-    		mazeArea.getChildren().clear();
-    		String map2Load = "./bin/" + levelList.getValue() + ".map";
-    		//new MazeGenerator(map2Load);
-    		new MazeCreator(map2Load);
-    		return mazeArea;
-    	default:
-    		return mainArea;
-    	}
+
+    	mainArea.getChildren().clear();
+    	mazeArea.getChildren().clear();
+    	mainArea.getChildren().addAll(v1, levelList, v2, start, about, exit, v3);
+    	mainArea.setAlignment(Pos.CENTER);
+    	mainArea.setSpacing(screenHeight * .025);
+    	return mainArea;
+		
 	}
 	
 	public BackgroundFill setBackground(String color1, String color2, String color3, int selection) {
@@ -251,4 +257,9 @@ public class ScreenCustomizer {
         	}
     }
 	
+	public void loadMaze() {
+		String map2Load = "./bin/" + levelList.getValue() + ".map";
+		new MazeCreator(map2Load);
+	}
+		
 }
