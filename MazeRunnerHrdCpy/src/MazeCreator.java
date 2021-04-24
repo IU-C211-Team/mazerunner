@@ -29,8 +29,12 @@ public class MazeCreator {
 	
 	private Pane[] boxes = new Pane[400];
 	
+	//set size of maze 20x20
 	private static int rows = 20;
 	private static int columns = 20;
+	
+	//create new player
+	Player player1 = new Player();
 	
 	
 	public MazeCreator(String level) {
