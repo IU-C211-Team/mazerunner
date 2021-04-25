@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -73,6 +74,8 @@ public class ScreenCustomizer {
 	private boolean startPressed = false;
 
 	private AlertBox aboutBox;
+	
+	private Label directions = new Label("Select a level: ");
 	
 	public Scene constructScene() {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
@@ -150,6 +153,8 @@ public class ScreenCustomizer {
     	
     	String[] mapLevels = mapList.toArray(new String[mapList.size()]);
     	
+    	directions.setFont(font2);
+    	
     	levelList = new ComboBox<>(FXCollections.observableArrayList(mapLevels));
     	if (!startPressed) {
     		levelList.setValue("Level 1");
@@ -190,7 +195,7 @@ public class ScreenCustomizer {
 
     	mainArea.getChildren().clear();
     	mazeArea.getChildren().clear();
-    	mainArea.getChildren().addAll(v1, levelList, v2, start, about, exit, v3);
+    	mainArea.getChildren().addAll(v1, directions, levelList, v2, start, about, exit, v3);
     	mainArea.setAlignment(Pos.CENTER);
     	mainArea.setSpacing(screenHeight * .025);
     	return mainArea;
