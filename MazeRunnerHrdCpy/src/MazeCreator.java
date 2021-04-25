@@ -44,14 +44,18 @@ public class MazeCreator {
 	private static int rows = 20;
 	private static int columns = 20;
 	
+	private ScreenCustomizer sCustom = new ScreenCustomizer();
+	
 	
 	public MazeCreator(String level) {
 		ScreenCustomizer sCustom = new ScreenCustomizer();
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
+		scene.setFill(Color.TRANSPARENT);
 		
 		border.setTop(setTop());
 		border.setCenter(loadMap(level));
 		border.setBackground(new Background(sCustom.setBackground("#F4EFE9", "#DECFBE", "#C8AF93", 1)));
+		border.setBorder(sCustom.loadBorder());
 		
 		if (ScreenCustomizer.fullscreen) {
 			window.setWidth(ScreenCustomizer.screenWidth);
@@ -131,6 +135,7 @@ public class MazeCreator {
 					
 				} else if (mapChar[i] == '1') {
 					boxes[i].setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+					test.get(i).setWall(false);
 					if (test.get(i).getX() == 0) {
 						System.out.println("Entrance is located at: " + row);
 					} else if (test.get(i).getX() == 19) {
