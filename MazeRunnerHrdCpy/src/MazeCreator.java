@@ -35,8 +35,6 @@ public class MazeCreator {
 	private BorderPane border = new BorderPane();
 	private GridPane mapGrid = new GridPane();
 	
-	private Node targetNode;
-	private Node prevNode;
 	
 	private Scene scene = new Scene(border, ScreenCustomizer.defaultWidth, ScreenCustomizer.defaultHeight);
 	
@@ -59,7 +57,7 @@ public class MazeCreator {
 	
 	private ScreenCustomizer sCustom = new ScreenCustomizer();
 	
-	private Player player = new Player();
+	private Player player;
 	
 	
 	public MazeCreator(String level) {
@@ -69,61 +67,21 @@ public class MazeCreator {
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
 			//player moves up with up arrow or "w"
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W) {
-				pastY = currentY;
-				currentY--;
-				
-				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, currentX, pastY);
-					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentY++;
-					// pastY++;
-				}
-				
-				System.out.println("UP\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+				player.moveUp();
 				
 			//player moves right with right arrow or "d" 
 			} else if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D) {
-				pastX = currentX;
-				currentX++;
-				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, currentY);
-					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentX--;
-				// 	pastX--;
-				}
+				player.moveRight();
 				
-				System.out.println("RIGHT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
 				
 			//player moves down with down arrow or "s"
 			} else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S) {
-				pastY = currentY;
-				currentY++;
-				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, currentX, pastY);
-					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentY--;
-				// 	pastY--;
-				}
-				
-				System.out.println("DOWN\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+				player.moveDown();
 				
 			//player moves left with left arrow or "a"
 			} else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A) {
-				pastX = currentX;
-				currentX--;
+				player.moveLeft();
 				
-				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, currentY);
-					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentX++;
-				// 	pastX++;
-				}
-				
-				System.out.println("LEFT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
 			} 
 		});
 		
@@ -210,9 +168,10 @@ public class MazeCreator {
 					spaces.get(i).setStyle("-fx-background-color: #ffffff;");
 					spaces.get(i).setWall(false);
 					if (spaces.get(i).getX() == 0) {
+						player = new Player(spaces, mapGrid, 0, 0, row, count);
 						start = true;
 						mapGrid.add(spaces.get(i), i % 20, row);
-						targetNode = getInitNode(mapGrid, count, row);
+						player.getInitNode(mapGrid, count, row);
 					} else if (spaces.get(i).getX() == 19) {
 						//System.out.println("Exit is located at: " + row);
 					}
@@ -230,46 +189,5 @@ public class MazeCreator {
 		return mapGrid;
 	}
 	
-	private Node getInitNode(GridPane gridPane, int col, int row) {
-	    for (Node node : gridPane.getChildren()) { 
-	    	if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-	        	node.setStyle("-fx-background-color: #ffff00;");
-	        	currentX = col;
-	        	pastX = col;
-	        	currentY = row;
-	        	pastY = row;
-	        	System.out.println("Original X and Y: " + currentX + ", " + currentY);
-	        	return node;
-	        }
-	    }
-	    return null;
-	}
-	private Node setNode(GridPane gridPane, int col, int row) {
-	    for (Node node : gridPane.getChildren()) { 
-	    	if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-	        	node.setStyle("-fx-background-color: #ffffff;");
-	        	return node;
-	        }
-	    }
-	    return null;
-	}
-	private Node getNode(GridPane gridPane, int col, int row) {
-	    for (Node node : gridPane.getChildren()) { 
-	    	if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-	        	node.setStyle("-fx-background-color: #ffff00;");
-	        	return node;
-	        }
-	    }
-	    return null;
-	}
-	
-	private boolean getWall(int col, int row) {
-		for (int i = 0; i < spaces.size(); i++) {
-    		if (spaces.get(i).getX() == col && spaces.get(i).getY() == row) {
-    			return spaces.get(i).isWall;
-    		}
-    	}
-		return false;
-	}
 	
 }
