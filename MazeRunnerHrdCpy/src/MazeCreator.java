@@ -33,6 +33,7 @@ public class MazeCreator {
 	private GridPane mapGrid = new GridPane();
 	
 	private Node targetNode;
+	private Node prevNode;
 	
 	private Scene scene = new Scene(border, ScreenCustomizer.defaultWidth, ScreenCustomizer.defaultHeight);
 	
@@ -62,19 +63,31 @@ public class MazeCreator {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 		scene.setFill(Color.TRANSPARENT);
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-			if(e.getCode() == KeyCode.UP) {
-				System.out.println("UP");
-			} else if(e.getCode() == KeyCode.RIGHT) {
-				System.out.println("RIGHT");
-			} else if(e.getCode() == KeyCode.DOWN) {
-				System.out.println("DOWN");
-			} else if(e.getCode() == KeyCode.LEFT) {
-				System.out.println("LEFT");
-			} else {
-				System.out.println("It is broken");
-			}
-
-
+			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W) {
+				pastY = currentY;
+				currentY--;
+				System.out.println("UP\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+			} else if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D) {
+				pastX = currentX;
+				currentX++;
+				if (!getWall(currentX, currentY)) {
+					prevNode = setNode(mapGrid, pastX, pastY);
+					targetNode = getNode(mapGrid, currentX, currentY);
+				} else {
+					currentX--;
+					pastX--;
+				}
+				
+				System.out.println("RIGHT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
+			} else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S) {
+				pastY = currentY;
+				currentY++;
+				System.out.println("DOWN\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+			} else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A) {
+				pastX = currentX;
+				currentX--;
+				System.out.println("LEFT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
+			} 
 		});
 		
 		border.setTop(setTop());
@@ -162,9 +175,8 @@ public class MazeCreator {
 						start = true;
 						mapGrid.add(spaces.get(i), i % 20, row);
 						targetNode = getInitNode(mapGrid, count, row);
-						System.out.println("Is this a wall? " + getWall(count, row));
 					} else if (spaces.get(i).getX() == 19) {
-						System.out.println("Exit is located at: " + row);
+						//System.out.println("Exit is located at: " + row);
 					}
 				}
 				if (!start) {
@@ -188,12 +200,21 @@ public class MazeCreator {
 	        	pastX = col;
 	        	currentY = row;
 	        	pastY = row;
+	        	System.out.println("Original X and Y: " + currentX + ", " + currentY);
 	        	return node;
 	        }
 	    }
 	    return null;
 	}
-	
+	private Node setNode(GridPane gridPane, int col, int row) {
+	    for (Node node : gridPane.getChildren()) { 
+	    	if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+	        	node.setStyle("-fx-background-color: #ffffff;");
+	        	return node;
+	        }
+	    }
+	    return null;
+	}
 	private Node getNode(GridPane gridPane, int col, int row) {
 	    for (Node node : gridPane.getChildren()) { 
 	    	if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
