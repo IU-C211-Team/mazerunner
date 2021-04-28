@@ -31,6 +31,7 @@ public class MazeCreator {
 	
 	private static int rows = 20;
 	private static int columns = 20;
+	Player p;
 	
 	
 	public MazeCreator(String level) {
@@ -60,8 +61,6 @@ public class MazeCreator {
 	public GridPane loadMap(String mapLvl) {
 		GridPane mapGrid = new GridPane();
 		mapGrid.setAlignment(Pos.CENTER);
-		
-	
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(mapLvl));
