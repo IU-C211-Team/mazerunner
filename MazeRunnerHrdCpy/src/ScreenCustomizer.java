@@ -1,4 +1,5 @@
 //@author Shaun Snyder
+//contributors: Cecily Dronebarger and Chloe Uphaus
 
 import java.io.File;
 import java.util.ArrayList;
@@ -260,8 +261,6 @@ public class ScreenCustomizer {
 		return tp;
 	}
 	
-	
-	//added by Chloe Uphaus 
 
 	public void getMapList(){
     	loop:
