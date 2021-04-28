@@ -1,3 +1,7 @@
+//@author Cecily Dronebarger
+//Contributors: Chloe Uphaus and Shaun Snyder
+
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -15,7 +19,7 @@ public class Player extends Node{
     //methods created for moving the player 
     
     public void moveLeft() {
-
+    	
     }
 
     public void moveRight() {
