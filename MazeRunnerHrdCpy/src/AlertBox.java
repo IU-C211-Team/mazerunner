@@ -1,3 +1,5 @@
+//@author Shaun Snyder
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
