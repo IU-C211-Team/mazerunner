@@ -50,12 +50,6 @@ public class MazeCreator {
 	private static int rows = 20;
 	private static int columns = 20;
 	Player p;
-	private int currentX;
-	private int currentY;
-	private int pastX;
-	private int pastY;
-	
-	private ScreenCustomizer sCustom = new ScreenCustomizer();
 	
 	private Player player;
 	
