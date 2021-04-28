@@ -1,4 +1,5 @@
 //@author Chloe Uphaus
+//Contributor: Shaun Snyder
 
 import javafx.scene.layout.Pane;
 
