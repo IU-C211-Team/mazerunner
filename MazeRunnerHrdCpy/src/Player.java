@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class Player extends Node{
@@ -16,6 +17,7 @@ public class Player extends Node{
 	private GridPane gridpane;
     Node prevNode;
     Node targetNode;
+    private AlertBox congrats;
 	
     public Player(ArrayList<Space> spaces, GridPane gridpane, int currentX, int currentY, int row, int col) {
     	this.spaces = spaces;
@@ -57,7 +59,7 @@ public class Player extends Node{
     Node moveLeft(){
         pastX = currentX;
 		currentX--;			
-			if (!getWall(currentX, currentY)) {
+			if (!getWall(currentX, currentY) && currentX >= 0) {
 				prevNode = setNode(gridpane, pastX, currentY);
 				targetNode = getNode(gridpane, currentX, currentY);
 			} else {
@@ -74,7 +76,8 @@ public class Player extends Node{
 				prevNode = setNode(gridpane, pastX, currentY);
 				targetNode = getNode(gridpane, currentX, currentY);
 				} else if (currentX == 20) {
-                    System.out.println("Game Over!");
+					congrats = new AlertBox("Congrats", "Congratulations you beat the maze!");
+					congrats.getBox();
                 } else {
 					currentX--;
 				// 	pastX--;
