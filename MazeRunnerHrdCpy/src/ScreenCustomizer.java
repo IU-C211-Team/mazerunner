@@ -11,12 +11,17 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -74,12 +79,16 @@ public class ScreenCustomizer {
 
 	private AlertBox aboutBox;
 	
+	private Label directions = new Label("Select a level: ");
+	
 	public Scene constructScene() {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
+		scene.setFill(Color.TRANSPARENT);
 
 		border.setTop(setTitleBar());
 		border.setCenter(setCenterArea());
 		border.setBackground(new Background(setBackground("#F4EFE9", "#DECFBE", "#C8AF93", 1)));
+		border.setBorder(loadBorder());
 
 		return scene;
 	}
@@ -150,6 +159,8 @@ public class ScreenCustomizer {
     	
     	String[] mapLevels = mapList.toArray(new String[mapList.size()]);
     	
+    	directions.setFont(font2);
+    	
     	levelList = new ComboBox<>(FXCollections.observableArrayList(mapLevels));
     	if (!startPressed) {
     		levelList.setValue("Level 1");
@@ -178,6 +189,13 @@ public class ScreenCustomizer {
     	
     	about.setFont(font2);
     	about.setPrefWidth(screenWidth * .15);
+    	about.setOnAction(e -> {
+    		String title = "MazeRunner";
+    		String text = "MazeRunner\n\nDesigned by Team Orange\n\nBased on the program from https://youtu.be/d8rU71OBkxU .";
+    		
+    		aboutBox = new AlertBox(title, text);
+    		aboutBox.getBox();
+    	});
     	
     	exit.setFont(font2);
     	exit.setPrefWidth(screenWidth * .15);
@@ -190,7 +208,7 @@ public class ScreenCustomizer {
 
     	mainArea.getChildren().clear();
     	mazeArea.getChildren().clear();
-    	mainArea.getChildren().addAll(v1, levelList, v2, start, about, exit, v3);
+    	mainArea.getChildren().addAll(v1, directions, levelList, v2, start, about, exit, v3);
     	mainArea.setAlignment(Pos.CENTER);
     	mainArea.setSpacing(screenHeight * .025);
     	return mainArea;
@@ -213,7 +231,7 @@ public class ScreenCustomizer {
 				lg = new LinearGradient(0, 0, (screenWidth * .65) / 2, (screenHeight * .1) / 2, false, CycleMethod.REFLECT, stop);
 		}
 		
-		BackgroundFill bf = new BackgroundFill(lg, CornerRadii.EMPTY, Insets.EMPTY);
+		BackgroundFill bf = new BackgroundFill(lg, new CornerRadii(20), Insets.EMPTY);
 		
 		return bf;
 	}
@@ -260,6 +278,12 @@ public class ScreenCustomizer {
 	public void loadMaze() {
 		String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
 		new MazeCreator(map2Load);
+	}
+	
+	public Border loadBorder() {
+		Border defaultBorder = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(20), new BorderWidths(3)));
+		
+		return defaultBorder;
 	}
 		
 }
