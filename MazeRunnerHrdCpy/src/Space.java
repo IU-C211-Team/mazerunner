@@ -15,6 +15,10 @@ public class Space extends Pane{
         this.isWall = wall;
     }
     
+    public boolean getWall() {
+    	return this.isWall;
+    }
+    
     public int getX() {
     	return this.xCoord;
     }

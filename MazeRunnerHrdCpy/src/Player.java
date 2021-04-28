@@ -2,13 +2,14 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import javafx.scene.Node;
 
-public class Player extends JPanel{
+
+public class Player extends Node{
 	int x, y;
 	
     public Player() {
-    	this.setBackground(Color.getHSBColor(0.3f, 0.3f, 1));
-    	this.setSize(MazeGenerator.panelSize, MazeGenerator.panelSize);
+    	
     }
 
     //methods created for moving the player 
