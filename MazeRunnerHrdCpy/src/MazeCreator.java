@@ -43,9 +43,7 @@ public class MazeCreator {
 	private Font font = new Font("Helvetica", 12);
 	
 	
-	private ArrayList<Space> spaces = new ArrayList<Space>();
-	
-	Player p;
+	private ArrayList<Space> spaces = new ArrayList<Space>()
 	
 	private Player player;
 	
