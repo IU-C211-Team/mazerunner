@@ -1,3 +1,6 @@
+//@author Chloe Uphaus 
+//contributors: Cecily Dronebarger and Shaun Snyder
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
