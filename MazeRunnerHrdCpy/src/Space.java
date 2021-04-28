@@ -1,4 +1,6 @@
-//@author Chloe Uphaus
+/**
+ * @author Chloe Uphaus 
+ */
 
 import javafx.scene.layout.Pane;
 
