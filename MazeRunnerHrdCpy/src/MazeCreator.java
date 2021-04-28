@@ -42,10 +42,20 @@ public class MazeCreator {
 	
 	private Font font = new Font("Helvetica", 12);
 	
+	private Region region1 = new Region();
+	private Region region2 = new Region();
 	
 	private ArrayList<Space> spaces = new ArrayList<Space>();
 	
+	private static int rows = 20;
+	private static int columns = 20;
 	Player p;
+	private int currentX;
+	private int currentY;
+	private int pastX;
+	private int pastY;
+	
+	private ScreenCustomizer sCustom = new ScreenCustomizer();
 	
 	private Player player;
 	
@@ -71,8 +81,11 @@ public class MazeCreator {
 			//player moves left with left arrow or "a"
 			} else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A) {
 				player.moveLeft();
-				
-			} 
+			
+			//player wants to leave enable escape key
+			} else if(e.getCode() == KeyCode.ESCAPE) {
+				window.close();
+			}
 		});
 		
 		
@@ -107,9 +120,7 @@ public class MazeCreator {
 		close.setTooltip(tp);
 		close.getStyleClass().add("button-style-closebutton");
 		close.setOnAction(e -> {
-			Node  source = (Node)  e.getSource(); 
-			Stage stage  = (Stage) source.getScene().getWindow();
-			stage.close();
+			window.close();
 		});
 		
 		top.setAlignment(Pos.TOP_RIGHT);
@@ -172,6 +183,8 @@ public class MazeCreator {
 				count++;
 				start = false;
 			}
+			
+			br.close();
 		} catch(Exception e) {
 			System.out.println(e);
 		}

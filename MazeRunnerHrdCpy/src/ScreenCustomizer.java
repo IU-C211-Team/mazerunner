@@ -1,5 +1,4 @@
 //@author Shaun Snyder
-//contributors: Cecily Dronebarger and Chloe Uphaus
 
 import java.io.File;
 import java.util.ArrayList;
@@ -261,11 +260,14 @@ public class ScreenCustomizer {
 		return tp;
 	}
 	
+	
+	//added by Chloe Uphaus 
 
 	public void getMapList(){
     	loop:
         	for(int i = 1; i < 99; i++){
-        		fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
+        		fileName = "./bin/Level "+i+".map";
+        		//fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
         		File map = new File(fileName);
         		if(map.exists()){
         			mapList.add("Level "+ i);
@@ -277,7 +279,8 @@ public class ScreenCustomizer {
     }
 	
 	public void loadMaze() {
-		String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
+		String map2Load = "./bin/" + levelList.getValue() + ".map";
+		//String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
 		new MazeCreator(map2Load);
 	}
 	
