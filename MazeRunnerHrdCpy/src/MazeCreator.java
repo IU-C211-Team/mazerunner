@@ -42,13 +42,9 @@ public class MazeCreator {
 	
 	private Font font = new Font("Helvetica", 12);
 	
-	private Region region1 = new Region();
-	private Region region2 = new Region();
 	
 	private ArrayList<Space> spaces = new ArrayList<Space>();
 	
-	private static int rows = 20;
-	private static int columns = 20;
 	Player p;
 	
 	private Player player;
