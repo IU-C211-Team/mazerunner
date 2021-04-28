@@ -73,11 +73,11 @@ public class MazeCreator {
 				currentY--;
 				
 				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, pastY);
+					prevNode = setNode(mapGrid, currentX, pastY);
 					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentY++;
-					pastY++;
+				// } else {
+				// 	currentY++;
+				// 	pastY++;
 				}
 				
 				System.out.println("UP\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
@@ -87,11 +87,11 @@ public class MazeCreator {
 				pastX = currentX;
 				currentX++;
 				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, pastY);
+					prevNode = setNode(mapGrid, pastX, currentY);
 					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentX--;
-					pastX--;
+				// } else {
+				// 	currentX--;
+				// 	pastX--;
 				}
 				
 				System.out.println("RIGHT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
@@ -101,11 +101,11 @@ public class MazeCreator {
 				pastY = currentY;
 				currentY++;
 				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, pastY);
+					prevNode = setNode(mapGrid, currentX, pastY);
 					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentY--;
-					pastY--;
+				// } else {
+				// 	currentY--;
+				// 	pastY--;
 				}
 				
 				System.out.println("DOWN\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
@@ -116,11 +116,11 @@ public class MazeCreator {
 				currentX--;
 				
 				if (!getWall(currentX, currentY)) {
-					prevNode = setNode(mapGrid, pastX, pastY);
+					prevNode = setNode(mapGrid, pastX, currentY);
 					targetNode = getNode(mapGrid, currentX, currentY);
-				} else {
-					currentX++;
-					pastX++;
+				// } else {
+				// 	currentX++;
+				// 	pastX++;
 				}
 				
 				System.out.println("LEFT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
