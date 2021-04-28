@@ -34,21 +34,10 @@ public class MazeCreator {
 	
 	private BorderPane border = new BorderPane();
 	private GridPane mapGrid = new GridPane();
-	
-	
 	private Scene scene = new Scene(border, ScreenCustomizer.defaultWidth, ScreenCustomizer.defaultHeight);
-	
 	private Button close = new Button("X");
-	
 	private Font font = new Font("Helvetica", 12);
-	
-	private Region region1 = new Region();
-	private Region region2 = new Region();
-	
-	private ArrayList<Space> spaces = new ArrayList<Space>();
-	
-	private ScreenCustomizer sCustom = new ScreenCustomizer();
-	
+	private ArrayList<Space> spaces = new ArrayList<Space>();	
 	private Player player;
 	
 	
@@ -64,8 +53,7 @@ public class MazeCreator {
 			//player moves right with right arrow or "d" 
 			} else if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D) {
 				player.moveRight();
-				
-				
+					
 			//player moves down with down arrow or "s"
 			} else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S) {
 				player.moveDown();
