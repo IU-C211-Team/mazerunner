@@ -1,3 +1,6 @@
+//@author Chloe Uphaus 
+//contributors: Cecily Dronebarger and Shaun Snyder
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -64,10 +67,22 @@ public class MazeCreator {
 		scene.getStylesheets().add(getClass().getResource("designstyles.css").toExternalForm());
 		scene.setFill(Color.TRANSPARENT);
 		scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+			//player moves up with up arrow or "w"
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W) {
 				pastY = currentY;
 				currentY--;
+				
+				if (!getWall(currentX, currentY)) {
+					prevNode = setNode(mapGrid, pastX, pastY);
+					targetNode = getNode(mapGrid, currentX, currentY);
+				} else {
+					currentY++;
+					pastY++;
+				}
+				
 				System.out.println("UP\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+				
+			//player moves right with right arrow or "d" 
 			} else if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D) {
 				pastX = currentX;
 				currentX++;
@@ -80,16 +95,38 @@ public class MazeCreator {
 				}
 				
 				System.out.println("RIGHT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
+				
+			//player moves down with down arrow or "s"
 			} else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S) {
 				pastY = currentY;
 				currentY++;
+				if (!getWall(currentX, currentY)) {
+					prevNode = setNode(mapGrid, pastX, pastY);
+					targetNode = getNode(mapGrid, currentX, currentY);
+				} else {
+					currentY--;
+					pastY--;
+				}
+				
 				System.out.println("DOWN\nPrev Y: " + pastY + "\nCurrent Y: " + currentY);
+				
+			//player moves left with left arrow or "a"
 			} else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A) {
 				pastX = currentX;
 				currentX--;
+				
+				if (!getWall(currentX, currentY)) {
+					prevNode = setNode(mapGrid, pastX, pastY);
+					targetNode = getNode(mapGrid, currentX, currentY);
+				} else {
+					currentX++;
+					pastX++;
+				}
+				
 				System.out.println("LEFT\nPrev X: " + pastX + "\nCurrent X: " + currentX);
 			} 
 		});
+		
 		
 		border.setTop(setTop());
 		border.setCenter(loadMap(level));
