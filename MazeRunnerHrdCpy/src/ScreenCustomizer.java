@@ -262,9 +262,6 @@ public class ScreenCustomizer {
 		return tp;
 	}
 	
-	
-	//added by Chloe Uphaus 
-
 	public void getMapList(){
     	loop:
         	for(int i = 1; i < 99; i++){
