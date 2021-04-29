@@ -1,6 +1,6 @@
 /**
- * @author Chloe Uphaus 
- * contributors: Cecily Dronebarger and Shaun Snyder
+ * @author Cecily Dronebarger
+ * contributors: Chloe Uphaus and Shaun Snyder
  */
 
 import java.util.ArrayList;
