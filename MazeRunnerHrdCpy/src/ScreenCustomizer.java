@@ -195,8 +195,9 @@ public class ScreenCustomizer {
     	about.setPrefWidth(screenWidth * .15);
     	about.setOnAction(e -> {
     		String title = "MazeRunner";
-    		String text = "MazeRunner\n\nDesigned by Team Orange\n\nBased on the program from https://youtu.be/d8rU71OBkxU .";
-    		
+    		String text = "MazeRunner\n\nControl player with arrow keys or A, S, D, and W.\n\nDesigned by Team Orange\n\n" +
+    		"Based on the program from https://youtu.be/d8rU71OBkxU."; 
+      		
     		aboutBox = new AlertBox(title, text);
     		aboutBox.getBox();
     	});
