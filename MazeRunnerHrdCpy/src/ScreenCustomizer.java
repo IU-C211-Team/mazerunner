@@ -266,8 +266,8 @@ public class ScreenCustomizer {
 	public void getMapList(){
     	loop:
         	for(int i = 1; i < 99; i++){
-        		fileName = "./bin/Level "+i+".map";
-        		//fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
+        		//fileName = "./bin/Level "+i+".map";
+        		fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
         		File map = new File(fileName);
         		if(map.exists()){
         			mapList.add("Level "+ i);
@@ -279,8 +279,8 @@ public class ScreenCustomizer {
     }
 	
 	public void loadMaze() {
-		String map2Load = "./bin/" + levelList.getValue() + ".map";
-		//String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
+		//String map2Load = "./bin/" + levelList.getValue() + ".map";
+		String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
 		new MazeCreator(map2Load);
 	}
 	
