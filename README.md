@@ -12,7 +12,7 @@ Once program start it shows three selections
 
 *START
 By clicking "START", use will able to start the Mazerunner game. User can control player with arrow keys or A, S, D, and W.
-If the player hit the wall, alert box will pop up and then hit "Okay" button to continue.
+Alert box will pop up when player pass the level.
 User can select the maze map from level 1 to 10.
 
 *ABOUT
