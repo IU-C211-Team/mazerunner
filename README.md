@@ -25,7 +25,6 @@ By clicking "EXIT", user will exit the program.
 
 Maze Game in Java - AP Cpmputer Science Final Project
 https://youtu.be/d8rU71OBkxU
-
 Used primarily to see how the level maps were created; All level maps used were original, none were borrowed.  
 
 Maze Solving - Rosettacode.org
