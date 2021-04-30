@@ -1,12 +1,12 @@
-//@author Cecily Dronebarger
-//Contributors: Chloe Uphaus and Shaun Snyder
-
+/**
+ * @author Cecily Dronebarger
+ * contributors: Chloe Uphaus and Shaun Snyder
+ */
 
 import java.util.ArrayList;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 
 public class Player extends Node{

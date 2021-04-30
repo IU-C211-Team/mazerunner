@@ -1,4 +1,7 @@
-//@author Shaun Snyder
+/**
+ * @author Shaun Snyder
+ Contributor: Cecily Dronebarger
+ */
 
 import java.io.File;
 import java.util.ArrayList;
@@ -193,8 +196,9 @@ public class ScreenCustomizer {
     	about.setPrefWidth(screenWidth * .15);
     	about.setOnAction(e -> {
     		String title = "MazeRunner";
-    		String text = "MazeRunner\n\nDesigned by Team Orange\n\nBased on the program from https://youtu.be/d8rU71OBkxU .";
-    		
+    		String text = "MazeRunner\n\nControl player with arrow keys or A, S, D, and W.\n\nDesigned by Team Orange\n\n" +
+    		"Based on the program from https://youtu.be/d8rU71OBkxU."; 
+      		
     		aboutBox = new AlertBox(title, text);
     		aboutBox.getBox();
     	});
@@ -260,14 +264,11 @@ public class ScreenCustomizer {
 		return tp;
 	}
 	
-	
-	//added by Chloe Uphaus 
-
 	public void getMapList(){
     	loop:
         	for(int i = 1; i < 99; i++){
-        		fileName = "./bin/Level "+i+".map";
-        		//fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
+        		//fileName = "./bin/Level "+i+".map";
+        		fileName = "MazeRunnerHrdCpy/src/Level "+i+".map";
         		File map = new File(fileName);
         		if(map.exists()){
         			mapList.add("Level "+ i);
@@ -279,8 +280,8 @@ public class ScreenCustomizer {
     }
 	
 	public void loadMaze() {
-		String map2Load = "./bin/" + levelList.getValue() + ".map";
-		//String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
+		//String map2Load = "./bin/" + levelList.getValue() + ".map";
+		String map2Load = "MazeRunnerHrdCpy/src/" + levelList.getValue() + ".map";
 		new MazeCreator(map2Load);
 	}
 	
