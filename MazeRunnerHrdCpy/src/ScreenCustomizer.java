@@ -1,5 +1,6 @@
 /**
  * @author Shaun Snyder
+ Contributor: Cecily Dronebarger
  */
 
 import java.io.File;
