@@ -30,7 +30,7 @@ Maze Solving - Rosettacode.org
 http://rosettacode.org/wiki/Maze_solving
 
 # Contributors 
-Chloe Uphaus MazeCreator.java, Space.java, Player.java;
+Chloe Uphaus MazeCreator.java, Space.java, Player.java, maze level maps 1-10;
 Shaun Snyder MazeCreator.java, MazeRunner.Java, ScreenCustomizer.java, Player.java, AlertBox.java, UI Design;
 Cecily Dronebarger MazeCreator.java, Player.java;
 Albert Park readme.md
